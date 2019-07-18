@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+Dir.chdir __dir__ do
+    require 'bundler/setup'
+    require 'dotenv/load'
+    require 'active_record'
+    require 'require_all'
+    require 'ostruct'
+end
+
+ActiveRecord::Base.establish_connection(ENV['MAGICARPI_DB'])
+
+if ENV['DEBUG']
+    require 'logger'
+    ActiveRecord::Base.logger = Logger.new(STDOUT)
+end
+
+require_rel 'lib'
+
+NetworkScanner.new.run
+GpsScanner.new.run
+
+# Nothing to do. May as well relax.
+# puts 'Main thread is going to sleep... zzz'
+loop { sleep 5 }

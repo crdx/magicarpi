@@ -1,0 +1,11 @@
+[Unit]
+Description=magicarpi
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/home/pi/magicarpi/magicarpi
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
