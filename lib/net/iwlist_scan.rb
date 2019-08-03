@@ -8,7 +8,9 @@ module Net
 
         def scan
             @lines = `iwlist wlan0 scan`.lines.map(&:strip).reject(&:empty?)
-            @networks = to_enum(:each_network).to_a
+            @networks = to_enum(:each_network).to_a.reject do |network|
+                network.essid.empty?
+            end
         end
 
         def length
