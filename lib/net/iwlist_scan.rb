@@ -6,19 +6,21 @@ module Net
             scan
         end
 
-        def scan
-            @lines = `iwlist wlan0 scan`.lines.map(&:strip).reject(&:empty?)
-            @networks = to_enum(:each_network).to_a.reject do |network|
-                network.essid.empty?
-            end
-        end
-
         def length
             @networks.length
         end
 
         def each
             @networks.each
+        end
+
+        private
+
+        def scan
+            @lines = `iwlist wlan0 scan`.lines.map(&:strip).reject(&:empty?)
+            @networks = to_enum(:each_network).to_a.reject do |network|
+                network.essid.empty?
+            end
         end
 
         def each_network
