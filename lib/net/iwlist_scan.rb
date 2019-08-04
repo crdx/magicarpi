@@ -14,13 +14,11 @@ module Net
         end
 
         def length
-            count
+            @networks.length
         end
 
         def each
-            @networks.each do |network|
-                yield network
-            end
+            @networks.each
         end
 
         def each_network
