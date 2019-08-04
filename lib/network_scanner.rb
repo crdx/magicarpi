@@ -3,13 +3,9 @@ class NetworkScanner
     end
 
     def log_networks(networks, location)
-        added = 0
-        networks.each do |network|
-            if WirelessNetworkLog.add(network, location)
-                added += 1
-            end
+        networks.count do |network|
+            WirelessNetworkLog.add(network, location)
         end
-        added
     end
 
     def scan
