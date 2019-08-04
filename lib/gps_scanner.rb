@@ -27,9 +27,7 @@ class GpsScanner
         end
     end
 
-    def degrees_minutes_to_decimal_degrees(degrees, minutes)
-        (degrees.to_i + minutes.to_f / 60).round(7)
-    end
+
 
     def merge_components(value, direction)
         if direction == 'N'
@@ -39,7 +37,7 @@ class GpsScanner
         end
 
         if parts
-            direction + degrees_minutes_to_decimal_degrees(*parts[1..-1]).to_s
+            direction + Util.degrees_minutes_to_decimal_degrees(*parts[1..-1]).to_s
         else
             nil
         end

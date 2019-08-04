@@ -2,12 +2,6 @@ class NetworkScanner
     def initialize
     end
 
-    def time_block
-        start = Time.now
-        res = yield
-        [((Time.now - start) * 1000).round, res]
-    end
-
     def log_networks(networks, location)
         added = 0
         networks.each do |network|
@@ -21,13 +15,13 @@ class NetworkScanner
     def scan
         location = GpsScanner.read
 
-        scan_time, networks = time_block do
+        scan_time, networks = Util.time_block do
             Net::IwlistScan.new
         end
 
         return if networks.length == 0
 
-        db_time, added = time_block do
+        db_time, added = Util.time_block do
             log_networks(networks, location)
         end
 
