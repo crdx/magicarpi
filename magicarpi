@@ -17,8 +17,12 @@ end
 
 require_rel 'lib'
 
-NetworkScanner.new.run
 GpsScanner.new.run
+
+# Give the GPS scanner a few seconds.
+sleep 5
+
+NetworkScanner.new.run
 
 # Nothing to do. May as well relax.
 # puts 'Main thread is going to sleep... zzz'
