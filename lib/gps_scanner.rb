@@ -27,8 +27,6 @@ class GpsScanner
         end
     end
 
-
-
     def merge_components(value, direction)
         if direction == 'N'
             parts = value.match(/(\d{2})([\d.]+)/)
