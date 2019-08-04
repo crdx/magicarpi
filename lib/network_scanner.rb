@@ -8,6 +8,16 @@ class NetworkScanner
         [((Time.now - start) * 1000).round, res]
     end
 
+    def log_networks(networks, location)
+        added = 0
+        networks.each do |network|
+            if WirelessNetworkLog.add(network, location)
+                added += 1
+            end
+        end
+        added
+    end
+
     def scan
         location = GpsScanner.read
 
@@ -17,14 +27,8 @@ class NetworkScanner
 
         return if networks.length == 0
 
-        added = 0
-
-        db_time, = time_block do
-            networks.each do |network|
-                if WirelessNetworkLog.add(network, location)
-                    added += 1
-                end
-            end
+        db_time, added = time_block do
+            log_networks(networks, location)
         end
 
         skipped = networks.length - added
