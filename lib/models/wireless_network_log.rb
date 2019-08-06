@@ -4,6 +4,7 @@ class WirelessNetworkLog < ActiveRecord::Base
 
         log = create({
             essid: network.essid,
+            mac_address: network.mac_address,
             channel: network.channel,
             signal_loss: network.signal_loss,
             auth: network.auth,
