@@ -12,22 +12,34 @@ class GpsScanner
     end
 
     def run
-        Thread.new do
-            read_nmea_sentences do |line|
-                sentence = NMEA::Sentence.new(line)
-                next if sentence.unparseable?
-                process(sentence)
-            end
+        read_nmea_sentences do |line|
+            sentence = NMEA::Sentence.new(line)
+            next if sentence.unparseable?
+            process(sentence)
         end
     end
 
     private
 
-    def read_nmea_sentences
-        File.foreach('/dev/serial0') do |line|
-            if line.valid_encoding? && line.start_with?('$')
-                yield line[1..-1]
+    def read_nmea_sentences(&block)
+        loop do
+            read_nmea_sentences_til_eof(&block)
+        end
+    end
+
+    def read_nmea_sentences_til_eof
+        file = File.open '/dev/serial0', File::RDWR | Fcntl::O_NOCTTY | Fcntl::O_NDELAY
+        file.binmode
+        file.sync = true
+        file.fcntl Fcntl::F_SETFL, file.fcntl(Fcntl::F_GETFL, 0) & ~Fcntl::O_NONBLOCK
+
+        begin
+            while line = file.readline
+                if line.valid_encoding? && line.start_with?('$')
+                    yield line[1..-1]
+                end
             end
+        rescue EOFError => e
         end
     end
 
