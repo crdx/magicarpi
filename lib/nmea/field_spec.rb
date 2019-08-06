@@ -70,6 +70,7 @@ module NMEA
 
         def self.get(type)
             const_get(type) if const_defined?(type)
+        rescue NameError => e
         end
     end
 end
