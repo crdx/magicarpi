@@ -41,11 +41,9 @@ class NetworkScanner
     end
 
     def run
-        Thread.new do
-            loop do
-                scan
-                sleep 1
-            end
+        loop do
+            scan
+            sleep 1
         end
     end
 end
