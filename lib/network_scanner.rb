@@ -2,6 +2,10 @@ class NetworkScanner
     def initialize
     end
 
+    def self.run
+        new.run
+    end
+
     def log_networks(networks, location)
         networks.count do |network|
             WirelessNetworkLog.add(network, location)

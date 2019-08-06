@@ -7,6 +7,10 @@ class GpsScanner
         @@reading = OpenStruct.new
     end
 
+    def self.run
+        new.run
+    end
+
     def run
         Thread.new do
             read_nmea_sentences do |line|

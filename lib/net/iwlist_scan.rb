@@ -7,11 +7,11 @@ module Net
         end
 
         def length
-            @networks.length
+            count
         end
 
-        def each
-            @networks.each
+        def each(&block)
+            @networks.each(&block)
         end
 
         private
