@@ -43,7 +43,7 @@ class NetworkScanner
     def run
         loop do
             scan
-            sleep 1
+            sleep 2
         end
     end
 end
