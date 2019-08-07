@@ -32,7 +32,7 @@ module Net
                 end
                 cur << line if cur
             end
-            yield IwlistNetwork.new(cur)
+            yield IwlistNetwork.new(cur) if cur
         end
     end
 end
