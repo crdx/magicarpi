@@ -24,12 +24,7 @@ require_rel 'lib'
 puts 'Starting GPS'
 
 Thread.new do
-    begin
-        GpsScanner.run
-    rescue => e
-        puts 'GpsScanner broke!'
-        pp e
-    end
+    GpsScanner.run
 end
 
 # Give the GPS scanner a few seconds.
@@ -38,12 +33,7 @@ sleep 5
 puts 'Starting network scanner'
 
 Thread.new do
-    begin
-        NetworkScanner.run
-    rescue => e
-        puts 'NetworkScanner broke!'
-        pp e
-    end
+    NetworkScanner.run
 end
 
 puts 'Startup finished'
