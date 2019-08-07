@@ -13,8 +13,8 @@ class GpsScanner
 
     def run
         read_nmea_sentences do |line|
-            sentence = NMEA::Sentence.new(line)
-            next if sentence.unparseable?
+            sentence = NMEA::Sentence.parse(line)
+            next if sentence.nil?
             process(sentence)
         end
     end
@@ -52,8 +52,6 @@ class GpsScanner
 
         if parts
             direction + Util.degrees_minutes_to_decimal_degrees(*parts[1..-1]).to_s
-        else
-            nil
         end
     end
 

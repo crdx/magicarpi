@@ -1,5 +1,5 @@
 module NMEA
-    class FieldSpec
+    module FieldSpec
         # GPS Minimum Recommended Communication
         GPRMC = %w[
             raw_time
