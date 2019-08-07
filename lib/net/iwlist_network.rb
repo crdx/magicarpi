@@ -1,21 +1,17 @@
 class IwlistNetwork
-    def initialize(lines)
-        @lines = lines
-        @props = parse(lines)
-    end
+    attr_reader :raw
 
-    def raw
-        @lines.join("\n")
+    def initialize(props, lines)
+        @props = props
+        @raw = lines.join("\n")
     end
 
     def method_missing(name, *args)
         @props.send(name)
     end
 
-    private
-
-    def parse(lines)
-        OpenStruct.new.tap do |props|
+    def self.parse(lines)
+        props = OpenStruct.new.tap do |props|
             lines.each do |line|
                 case line
                 when /Cell (\d+) - Address: (.*)/    then props.cell = $1.to_i
@@ -29,5 +25,11 @@ class IwlistNetwork
                 end
             end
         end
+
+        if props.essid.empty?
+            return nil
+        end
+
+        IwlistNetwork.new(props, lines)
     end
 end

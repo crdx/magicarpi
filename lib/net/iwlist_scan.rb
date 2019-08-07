@@ -2,8 +2,13 @@ module Net
     class IwlistScan
         include Enumerable
 
-        def initialize
-            scan
+        def self.scan
+            new(`iwlist wlan0 scan`.lines.map(&:strip).reject(&:empty?))
+        end
+
+        def initialize(lines)
+            @lines = lines
+            @networks = to_enum(:parse_each).to_a
         end
 
         def length
@@ -16,23 +21,16 @@ module Net
 
         private
 
-        def scan
-            @lines = `iwlist wlan0 scan`.lines.map(&:strip).reject(&:empty?)
-            @networks = to_enum(:each_network).to_a.reject do |network|
-                network.essid.empty?
-            end
-        end
-
-        def each_network
+        def parse_each
             cur = nil
             @lines.each do |line|
                 if line =~ /Cell \d+/
-                    yield IwlistNetwork.new(cur) if cur
+                    yield cur if cur && cur = IwlistNetwork.parse(cur)
                     cur = []
                 end
                 cur << line if cur
             end
-            yield IwlistNetwork.new(cur) if cur
+            yield cur if cur && cur = IwlistNetwork.parse(cur)
         end
     end
 end

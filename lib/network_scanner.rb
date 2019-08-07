@@ -6,7 +6,7 @@ class NetworkScanner
         new.run
     end
 
-    def log_networks(networks, location)
+    def log_results(networks, location)
         networks.count do |network|
             WirelessNetworkLog.add(network, location)
         end
@@ -15,17 +15,17 @@ class NetworkScanner
     def scan
         location = GpsScanner.read
 
-        scan_time, networks = Util.time_block do
-            Net::IwlistScan.new
+        scan_time, results = Util.time_block do
+            Net::IwlistScan.scan
         end
 
-        return if networks.length == 0
+        return if results.length == 0
 
         db_time, added = Util.time_block do
-            log_networks(networks, location)
+            log_results(results, location)
         end
 
-        skipped = networks.length - added
+        skipped = results.length - added
 
         puts [
             "added=#{added}",
