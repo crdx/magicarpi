@@ -36,6 +36,12 @@ Thread.new do
     NetworkScanner.run
 end
 
+puts 'Starting time service'
+
+Thread.new do
+    TimeService.run
+end
+
 puts 'Startup finished'
 
 # Nothing to do. May as well relax.

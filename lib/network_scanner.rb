@@ -35,6 +35,8 @@ class NetworkScanner
             "pdop=#{location.pdop}",
             "vdop=#{location.vdop}",
             "hdop=#{location.hdop}",
+            "date=#{location.date}",
+            "time=#{location.time}",
         ].join(' ')
     end
 

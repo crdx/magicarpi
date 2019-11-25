@@ -58,14 +58,31 @@ class GpsScanner
         end
     end
 
+    def parse_six_digits(str)
+         str =~ /(\d\d)(\d\d)(\d\d)/
+         [$1, $2, $3]
+     end
+
+    # 222517.000
+    def parse_time(str)
+        parse_six_digits(str) * ':'
+    end
+
+    # 251119
+    def parse_date(str)
+        parse_six_digits(str).reverse * '-'
+    end
+
     def process(sentence)
         @@reading = @@reading.clone.tap do |reading|
-            return if ![:GPRMC, :GPGSA].include?(sentence.code)
+            return unless [:GPRMC, :GPGSA].include?(sentence.code)
 
             case sentence.code
             when :GPRMC
                 reading.lat = merge_components(sentence.data.lat_value, sentence.data.lat_direction)
                 reading.lng = merge_components(sentence.data.lng_value, sentence.data.lng_direction)
+                reading.time = parse_time(sentence.data.raw_time)
+                reading.date = parse_date(sentence.data.raw_date)
             when :GPGSA
                 reading.pdop = sentence.data.pdop
                 reading.hdop = sentence.data.hdop
