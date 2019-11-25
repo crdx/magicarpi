@@ -27,7 +27,7 @@ Thread.new do
     GpsScanner.run
 end
 
-# Give the GPS scanner a few seconds.
+# Give the GPS scanner a few seconds to start.
 sleep 5
 
 puts 'Starting network scanner'
@@ -40,4 +40,6 @@ puts 'Startup finished'
 
 # Nothing to do. May as well relax.
 # puts 'Main thread is going to sleep... zzz'
-loop { sleep 5 }
+loop do
+    sleep 5
+end

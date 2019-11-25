@@ -1,7 +1,4 @@
 class NetworkScanner
-    def initialize
-    end
-
     def self.run
         new.run
     end
@@ -28,6 +25,7 @@ class NetworkScanner
         skipped = results.length - added
 
         puts [
+            'Scan:',
             "added=#{added}",
             "skipped=#{skipped}",
             "scan_time=#{scan_time}ms",

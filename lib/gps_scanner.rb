@@ -1,14 +1,14 @@
 class GpsScanner
+    def self.run
+        new.run
+    end
+
     def self.read
         @@reading.clone
     end
 
     def initialize
         @@reading = OpenStruct.new
-    end
-
-    def self.run
-        new.run
     end
 
     def run
@@ -28,6 +28,9 @@ class GpsScanner
     end
 
     def read_nmea_sentences_til_eof
+        # Make *absolutely* sure we don't prevent anyone else from accessing
+        # /dev/serial0. No one else would on our single-user system, but it's
+        # good manners nonetheless.
         file = File.open '/dev/serial0', File::RDWR | Fcntl::O_NOCTTY | Fcntl::O_NDELAY
         file.binmode
         file.sync = true
