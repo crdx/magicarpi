@@ -4,8 +4,8 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/home/pi/magicarpi/magicarpi
-Restart=on-failure
+ExecStart=/home/pi/magicarpi/magicarpi %I
+Restart=always
 
 [Install]
 WantedBy=multi-user.target

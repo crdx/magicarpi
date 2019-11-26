@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 
+if ARGV[0].nil?
+    raise 'Missing serial port'
+end
+
 Dir.chdir __dir__ do
     require 'bundler/setup'
     require 'dotenv/load'
@@ -24,7 +28,7 @@ require_rel 'lib'
 puts 'Starting GPS'
 
 Thread.new do
-    GpsScanner.run
+    GpsScanner.run(ARGV[0])
 end
 
 # Give the GPS scanner a few seconds to start.
