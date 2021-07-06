@@ -6,6 +6,7 @@ After=multi-user.target
 Type=simple
 ExecStart=/home/pi/magicarpi/magicarpi %I
 Restart=always
+Environment="MAGICARPI_DB=mysql://user:pass@localhost/magicarpi"
 
 [Install]
 WantedBy=multi-user.target
