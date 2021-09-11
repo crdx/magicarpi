@@ -2,7 +2,7 @@
 
 **magicarpi** is an on-the-go wireless network data collector.
 
-It runs persistently on a portable device and constantly scans for wireless networks. It logs any found along with their ESSID, MAC address, channel, signal strength and loss, authentication type, and (using the GPS module) the current latitude and longitude.
+It runs persistently on a portable device and constantly scans for wireless networks. It logs any found along with their ESSID, MAC address, channel, signal strength and loss, authentication type, and (using the GPS module) the current time, latitude, and longitude.
 
 This data could then be used to plot a map of wireless networks and their locations, or to perform data analysis of the popularity and variety of used ESSIDs.
 
