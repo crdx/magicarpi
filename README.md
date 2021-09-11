@@ -10,6 +10,8 @@ This data could then be used to plot a map of wireless networks and their locati
 
 A portable device (Raspberry Pi recommended) with a GPS and wireless networking module.
 
+![](images/pi.jpg)
+
 ## Usage
 
 Clone this repository on your device.
@@ -68,5 +70,3 @@ Open an [issue](https://github.com/crdx/magicarpi/issues) or send a [pull reques
 ## Licence
 
 [MIT](LICENCE.md).
-
-<!-- Images: ![Alt Text](https://raw.github.com/crdx/magicarpi/master/...) -->
