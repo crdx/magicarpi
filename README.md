@@ -63,7 +63,7 @@ wireless_network_log_id int(11)
 content                 text
 ```
 
-## Bugs or contributions
+## Contributions
 
 Open an [issue](https://github.com/crdx/magicarpi/issues) or send a [pull request](https://github.com/crdx/magicarpi/pulls).
 
