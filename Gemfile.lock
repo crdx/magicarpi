@@ -36,4 +36,4 @@ DEPENDENCIES
   require_all (~> 2.0)
 
 BUNDLED WITH
-   2.2.16
+   2.3.23
