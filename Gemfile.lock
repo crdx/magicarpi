@@ -19,7 +19,7 @@ GEM
     i18n (1.11.0)
       concurrent-ruby (~> 1.0)
     minitest (5.16.2)
-    mysql2 (0.5.3)
+    mysql2 (0.5.4)
     require_all (2.0.0)
     thread_safe (0.3.6)
     tzinfo (1.2.10)
@@ -32,7 +32,7 @@ DEPENDENCIES
   activerecord (~> 5.2)
   colorize (~> 0.8.1)
   dotenv (~> 2.7)
-  mysql2 (~> 0.5.2)
+  mysql2 (~> 0.5.4)
   require_all (~> 2.0)
 
 BUNDLED WITH
