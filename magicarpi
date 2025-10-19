@@ -8,7 +8,6 @@ Dir.chdir __dir__ do
     require 'bundler/setup'
     require 'dotenv/load'
     require 'active_record'
-    require 'require_all'
 end
 
 require 'ostruct'
@@ -23,7 +22,16 @@ if ENV['DEBUG']
     ActiveRecord::Base.logger = Logger.new(STDOUT)
 end
 
-require_rel 'lib'
+require_relative 'lib/models/wireless_network_log'
+require_relative 'lib/models/wireless_network_dump'
+require_relative 'lib/net/iwlist_network'
+require_relative 'lib/net/iwlist_scan'
+require_relative 'lib/gps_scanner'
+require_relative 'lib/network_scanner'
+require_relative 'lib/util'
+require_relative 'lib/nmea/field_spec'
+require_relative 'lib/nmea/sentence'
+require_relative 'lib/time_service'
 
 puts 'Starting GPS'
 
